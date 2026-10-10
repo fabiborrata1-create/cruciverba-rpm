@@ -5,7 +5,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cruciverba R.P.M.</title>
-<style>
+#cruciverba {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+#cruciverba img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#game {
+  position: absolute;
+  inset: 0;
+}
+ <style>
 body{font-family:Arial,sans-serif;max-width:700px;margin:auto;padding:20px;background:#f5f2eb;color:#222}
 h1{font-size:26px} .intro{line-height:1.5}
 .word{display:flex;align-items:center;gap:3px;margin:10px 0 20px;flex-wrap:wrap}
@@ -19,7 +36,10 @@ button{padding:12px 16px;border:0;border-radius:6px;background:#222;color:white;
 <h1>(MIS)UNDERSTANDING MEDIA</h1>
 <p class="intro"><b>SFIDA ACCETTATA?</b><br>
 Leggi le definizioni, trova le parole e completa le caselle. Hai finito? Controlla le soluzioni!</p>
-<div id="game"></div>
+<div id="cruciverba">
+  <img src="Cruciverba R.P.M.jpg" alt="Cruciverba originale">
+  <div id="game"></div>
+</div>
 <button onclick="clearAll()">Cancella lettere</button>
 <button onclick="showSolutions()">Mostra soluzioni</button>
 <div id="solutions">
