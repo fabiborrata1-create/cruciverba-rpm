@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cruciverba R.P.M.</title>
+<style>
+body{font-family:Arial,sans-serif;max-width:700px;margin:auto;padding:20px;background:#f5f2eb;color:#222}
+h1{font-size:26px} .intro{line-height:1.5}
+.word{display:flex;align-items:center;gap:3px;margin:10px 0 20px;flex-wrap:wrap}
+.cell{width:30px;height:36px;border:1px solid #222;background:white;text-align:center;font-size:20px;text-transform:uppercase;box-sizing:border-box;border-radius:3px}
+.clue{font-size:15px;font-weight:bold;margin-top:14px}
+button{padding:12px 16px;border:0;border-radius:6px;background:#222;color:white;font-size:16px;margin:8px 5px 8px 0}
+#solutions{display:none;background:white;padding:14px;border-radius:8px;line-height:1.8}
+</style>
+</head>
+<body>
+<h1>(MIS)UNDERSTANDING MEDIA</h1>
+<p class="intro"><b>SFIDA ACCETTATA?</b><br>
+Leggi le definizioni, trova le parole e completa le caselle. Hai finito? Controlla le soluzioni!</p>
+<div id="game"></div>
+<button onclick="clearAll()">Cancella lettere</button>
+<button onclick="showSolutions()">Mostra soluzioni</button>
+<div id="solutions">
+<h2>Soluzioni</h2>
+<p>VIDEOSCULTURE · MEDIA · GIOCONDA · MONOSCOPI · MARILYN · TRIBALE · MADDALONI · R.P.M. · ARTE · AMA · MUSEO</p>
+</div>
+<script>
+const words=[
+["VIDEOSCULTURE","Sculture che dialogano con il linguaggio del video."],
+["MEDIA","I diversi linguaggi attraverso cui l'arte prende forma."],
+["GIOCONDA","Il volto di Leonardo che Roberto reinterpreta in molti modi."],
+["MONOSCOPI","Un'immagine, infinite trasformazioni."],
+["MARILYN","L'icona di Warhol reinterpretata da Roberto."],
+["TRIBALE","La fase più «selvaggia» della ricerca di Roberto."],
+["MADDALONI","La città che ospita la mostra."],
+["RPM","Le iniziali che identificano l'artista."],
+["ARTE","Il linguaggio attraverso cui Roberto trasforma immagini e segni."],
+["AMA","L'acronimo della Biennale di Maddaloni."],
+["MUSEO","Il luogo che accoglie R.P.M."]
+];
+const game=document.getElementById("game");
+words.forEach((item,i)=>{
+ const title=document.createElement("div");
+ title.className="clue";
+ title.textContent=(i+1)+". "+item[1];
+ game.appendChild(title);
+ const row=document.createElement("div");
+ row.className="word";
+ [...item[0]].forEach((letter,j)=>{
+  const input=document.createElement("input");
+  input.className="cell";
+  input.maxLength=1;
+  input.autocomplete="off";
+  input.setAttribute("aria-label","Parola "+(i+1)+", lettera "+(j+1));
+  input.addEventListener("input",()=>{input.value=input.value.replace(/[^a-zàèéìòù]/gi,"").toUpperCase();if(input.value&&row.children[j+1])row.children[j+1].focus()});
+  input.addEventListener("keydown",e=>{if(e.key==="Backspace"&&!input.value&&row.children[j-1])row.children[j-1].focus()});
+  row.appendChild(input);
+ });
+ game.appendChild(row);
+});
+function clearAll(){document.querySelectorAll(".cell").forEach(x=>x.value="");document.getElementById("solutions").style.display="none"}
+function showSolutions(){document.getElementById("solutions").style.display="block"}
+</script>
+</body>
+</html>
